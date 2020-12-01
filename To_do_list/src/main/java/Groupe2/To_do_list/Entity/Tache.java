@@ -15,7 +15,7 @@ public class Tache {
     private Date Date_creation;
     private Date Date_modification;
 
-    /*@OneToOne
+    @OneToOne
     private Personne personne;
 
     @OneToOne
@@ -24,6 +24,7 @@ public class Tache {
     @OneToOne
     private Personne personne_Modification;
 
+    /*
     @OneToOne
     private Status status;
     */
