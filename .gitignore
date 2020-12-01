@@ -33,5 +33,5 @@ build/
 .vscode/
 
 
-**/application.properties
+To_do_list\src\main\resources/application.properties
 /bin/
