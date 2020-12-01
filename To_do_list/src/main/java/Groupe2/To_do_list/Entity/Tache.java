@@ -24,10 +24,8 @@ public class Tache {
     @OneToOne
     private Personne personne_Modification;
 
-    /*
     @OneToOne
     private Status status;
-    */
 
 
 

@@ -4,16 +4,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Personne {
+public class Role {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer Id_Personne;
+    private Integer Id_Role;
 
     private String Nom;
-    private String Prenom;
 
-    @OneToOne
-    private Role Role;
 
 }
