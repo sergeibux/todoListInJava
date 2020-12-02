@@ -8,12 +8,12 @@ public class Tache {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer Id_Tache;
+    private Integer id_Tache;
 
-    private String Titre;
-    private String Texte;
-    private Date Date_creation;
-    private Date Date_modification;
+    private String titre;
+    private String texte;
+    private Date date_creation;
+    private Date date_modification;
 
     @OneToOne
     private Personne personne;

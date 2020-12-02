@@ -10,25 +10,25 @@ public class Personne {
 	public Personne() {}
 	
 	public Personne(String nom, String prenom, Role role) {
-		this.Nom = nom;
-		this.Prenom = prenom;
-		this.Role = role;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.role = role;
 	}
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer Id_Personne;
+    private Integer id_Personne;
 
-    private String Nom;
-    private String Prenom;
+    private String nom;
+    private String prenom;
 
     @OneToOne
-    private Role Role;
+    private Role role;
 
     public String to_string() {
-    	return "Personne :> ID : " + this.Id_Personne 
-    + " :> Nom : " + Nom 
-    + " :> Prénom : " + Prenom 
-    + " :> Role : " + Role.to_string(); 
+    	return "Personne :> ID : " + this.id_Personne 
+    + " :> Nom : " + nom 
+    + " :> Prénom : " + prenom 
+    + " :> Role : " + role.to_string(); 
     }
 }
