@@ -1,6 +1,7 @@
 package Groupe2.To_do_list.Controller;
 
 import Groupe2.To_do_list.Entity.Personne;
+import Groupe2.To_do_list.Service.PersonneService;
 import Groupe2.To_do_list.Entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,6 @@ public class PersonneController {
     
     @GetMapping(path="/byId")
     public @ResponseBody String getPersonne (@RequestParam int id) {
-
         Optional<Personne> optionalPersonne = personneRepository.findById(id);
         if (optionalPersonne.isPresent()){
             Personne p = optionalPersonne.get();
@@ -49,7 +49,7 @@ public class PersonneController {
     	Role r = roleRepository.findById(roleId).get();
         
     	Personne p = new Personne();
-        if (p.savePersonne(nom, prenom, r, personneRepository)) {
+        if (PersonneService.savePersonne(nom, prenom, r, personneRepository)) {
             return "Saved";
         }else return "Error";
     }

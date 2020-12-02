@@ -1,7 +1,7 @@
 package Groupe2.To_do_list.Controller;
 
 import Groupe2.To_do_list.Entity.Role;
-
+import Groupe2.To_do_list.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +21,11 @@ public class RoleController {
     @Autowired
     private Groupe2.To_do_list.Repository.RoleRepository roleRepository;
 
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<Role> getAllRoles () {
+        return roleRepository.findAll();
+    }
+
     @GetMapping(path="/byId")
     public @ResponseBody String getRole (@RequestParam int id) {
         Optional<Role> optionalRole = roleRepository.findById(id);
@@ -30,13 +35,11 @@ public class RoleController {
         }else {
             return "Error";
         }
-
     }
     
     @PostMapping(path="/add")
     public @ResponseBody String addNewUser (@RequestParam String nom) {
-    	Role r = new Role();
-        if (r.saveRole(nom, roleRepository)) {
+        if (RoleService.saveRole(nom, roleRepository)) {
             return "Saved";
         }else return "Error";
     }
