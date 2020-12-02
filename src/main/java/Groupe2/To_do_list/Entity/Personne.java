@@ -1,12 +1,19 @@
 package Groupe2.To_do_list.Entity;
 
-import Groupe2.To_do_list.Repository.PersonneRepository;
 import javax.persistence.*;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Personne {
+	
+	public Personne() {}
+	
+	public Personne(String nom, String prenom, Role role) {
+		this.Nom = nom;
+		this.Prenom = prenom;
+		this.Role = role;
+	}
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -23,19 +30,5 @@ public class Personne {
     + " :> Nom : " + Nom 
     + " :> Prénom : " + Prenom 
     + " :> Role : " + Role.to_string(); 
-    }
-    
-    public boolean savePersonne(String nom, String prenom, Role role, PersonneRepository personneRepository) {
-	    try {
-	        
-	    	this.Nom = nom;
-	    	this.Prenom = prenom;
-	    	this.Role = role;
-	    	
-	    	personneRepository.save(this);
-	        return true;
-	    }catch (Exception e) {
-	    	return false;
-	    }
     }
 }
