@@ -48,7 +48,7 @@ public class PersonneController {
     	
     	Role r = roleRepository.findById(roleId).get();
         
-    	Personne p = new Personne();
+//    	Personne p = new Personne();
         if (PersonneService.savePersonne(nom, prenom, r, personneRepository)) {
             return "Saved";
         }else return "Error";
