@@ -16,4 +16,10 @@ public class Personne {
     @OneToOne
     private Role Role;
 
+    public String to_string() {
+    	return "Personne :> ID : " + this.Id_Personne 
+    + " :> Nom : " + Nom 
+    + " :> Prénom : " + Prenom 
+    + " :> Role : " + Role.to_string(); 
+    }
 }
