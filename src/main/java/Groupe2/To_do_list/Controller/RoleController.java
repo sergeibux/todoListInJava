@@ -1,6 +1,7 @@
 package Groupe2.To_do_list.Controller;
 
 import Groupe2.To_do_list.Entity.Role;
+import Groupe2.To_do_list.Repository.RoleRepository;
 import Groupe2.To_do_list.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import javax.persistence.*;
 @RequestMapping(path="/role")
 public class RoleController {
     @Autowired
-    private Groupe2.To_do_list.Repository.RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Role> getAllRoles () {
@@ -31,7 +32,7 @@ public class RoleController {
         Optional<Role> optionalRole = roleRepository.findById(id);
         if (optionalRole.isPresent()){
             Role r = optionalRole.get();
-            return r.to_string();
+            return r.toString();
         }else {
             return "Error";
         }

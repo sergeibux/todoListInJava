@@ -12,4 +12,20 @@ public class Status {
     private Integer id_Status;
 
     private String nom;
+
+    public Integer getId_Status() {
+        return id_Status;
+    }
+
+    public void setId_Status(Integer id_Status) {
+        this.id_Status = id_Status;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }
