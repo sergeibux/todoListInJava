@@ -1,10 +1,10 @@
-package Groupe2.To_do_list.controller;
+package groupe2.to_do_list.controller;
 
-import Groupe2.To_do_list.entity.Role;
-import Groupe2.To_do_list.repository.PersonneRepository;
-import Groupe2.To_do_list.repository.RoleRepository;
-import Groupe2.To_do_list.service.PersonneService;
-import Groupe2.To_do_list.entity.Personne;
+import groupe2.to_do_list.entity.Role;
+import groupe2.to_do_list.repository.PersonneRepository;
+import groupe2.to_do_list.repository.RoleRepository;
+import groupe2.to_do_list.service.PersonneService;
+import groupe2.to_do_list.entity.Personne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
