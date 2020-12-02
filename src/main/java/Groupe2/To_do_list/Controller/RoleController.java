@@ -23,8 +23,14 @@ public class RoleController {
 
     @GetMapping(path="/byId")
     public @ResponseBody String getRole (@RequestParam int id) {
-    	Role r = roleRepository.findById(id).get();
-    	return r.to_string();
+        Optional<Role> optionalRole = roleRepository.findById(id);
+        if (optionalRole.isPresent()){
+            Role r = optionalRole.get();
+            return r.to_string();
+        }else {
+            return "Error";
+        }
+
     }
     
     @PostMapping(path="/add")
