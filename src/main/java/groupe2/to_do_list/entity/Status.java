@@ -13,6 +13,10 @@ public class Status {
 
     private String nom;
 
+    public Status (String nom) {
+     this.nom = nom;
+    }
+
     public Integer getId_Status() {
         return id_Status;
     }
