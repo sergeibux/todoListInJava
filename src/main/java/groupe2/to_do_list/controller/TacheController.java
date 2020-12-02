@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.text.SimpleDateFormat;
 
 @Controller
 @RequestMapping(path="/tache")
@@ -51,37 +52,41 @@ public class TacheController {
     @PostMapping(path="/add")
     public @ResponseBody String addNewTask (@RequestParam String titre,
     		@RequestParam String texte,
-			@RequestParam Date date_creation,
-			@RequestParam Date date_modification,
+			@RequestParam String dateCreation,
 			@RequestParam int personneId,
-			@RequestParam int personne_creationId,
+			@RequestParam int personneCreationId,
 			@RequestParam int statusId) {
 
-    	Optional<Personne> optionalPersonne = personneRepository.findById(personneId);
-    	if (!optionalPersonne.isPresent())
-    		return "error #1 : no Personne field with id " + personneId;
-    	Personne personne = optionalPersonne.get();
-    	
-    	Optional<Personne> optionalPersonneCreation = personneRepository.findById(personne_creationId);
-    	if (!optionalPersonneCreation.isPresent())
-    		return "error #2 : no Personne field with id " + personne_creationId;
-    	Personne personne_creation = optionalPersonneCreation.get();
-    	
-    	Optional<Status> optionalStatus = statusRepository.findById(statusId);
-    	if (!optionalStatus.isPresent())
-    		return "error #3 : no Status field with id " + statusId;    	
-    	Status status = optionalStatus.get();
-    	
-        if (TacheService.saveTache(
-        		titre,
-        		texte,
-        		date_creation,
-        		date_modification,
-        		personne,
-        		personne_creation,
-        		status,
-        		tacheRepository)) {
-            return "Saved";
-        }else return "Error";
+    	try {
+	    	Optional<Personne> optionalPersonne = personneRepository.findById(personneId);
+	    	if (!optionalPersonne.isPresent())
+	    		return "error #1 : no Personne field with id " + personneId;
+	    	Personne personne = optionalPersonne.get();
+	    	
+	    	Optional<Personne> optionalPersonneCreation = personneRepository.findById(personneCreationId);
+	    	if (!optionalPersonneCreation.isPresent())
+	    		return "error #2 : no Personne field with id " + personneCreationId;
+	    	Personne personne_creation = optionalPersonneCreation.get();
+	    	
+	    	Optional<Status> optionalStatus = statusRepository.findById(statusId);
+	    	if (!optionalStatus.isPresent())
+	    		return "error #3 : no Status field with id " + statusId;    	
+	    	Status status = optionalStatus.get();
+	    	
+	    	Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateCreation);
+	    	
+	        if (TacheService.saveTache(
+	        		titre,
+	        		texte,
+	        		date,
+	        		personne,
+	        		personne_creation,
+	        		status,
+	        		tacheRepository)) {
+	            return "Saved";
+	        }else return "Error";
+    	} catch (Exception e) {
+	    	return "Unhandled error : " + e;
+	    }
     }
 }

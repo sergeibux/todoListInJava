@@ -12,14 +12,12 @@ public class Tache {
 			String titre,
 			String texte,
 			Date date_creation,
-			Date date_modification,
 			Personne personne,
 			Personne personne_creation,
 			Status status) {
 		this.titre = titre;
 		this.texte = texte;
 		this.date_creation = date_creation;
-		this.date_modification = date_modification;
 		this.personne = personne;
 		this.personne_creation = personne_creation;
 		this.status = status;

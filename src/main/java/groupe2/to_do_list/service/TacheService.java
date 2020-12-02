@@ -11,13 +11,12 @@ public class TacheService{
 			String titre,
 			String texte,
 			Date date_creation,
-			Date date_modification,
 			Personne personne,
 			Personne personne_creation,
 			Status status,
 			TacheRepository tacheRepository) {
 	    try {
-	    	Tache tache = new Tache (titre, texte, date_creation, date_modification, personne, personne_creation, status);
+	    	Tache tache = new Tache (titre, texte, date_creation, personne, personne_creation, status);
 	    	
 	    	tacheRepository.save(tache);
 	        return true;
