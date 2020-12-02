@@ -1,4 +1,4 @@
-package groupe2.to_do_list.entity;
+package Groupe2.To_do_list.entity;
 
 import javax.persistence.*;
 import java.util.Date;

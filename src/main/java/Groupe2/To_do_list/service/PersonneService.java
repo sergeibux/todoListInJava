@@ -1,8 +1,8 @@
-package groupe2.to_do_list.service;
+package Groupe2.To_do_list.service;
 
-import groupe2.to_do_list.repository.PersonneRepository;
-import groupe2.to_do_list.entity.Role;
-import groupe2.to_do_list.entity.Personne;
+import Groupe2.To_do_list.entity.Role;
+import Groupe2.To_do_list.repository.PersonneRepository;
+import Groupe2.To_do_list.entity.Personne;
 
 public class PersonneService{
 	public static boolean savePersonne(String nom, String prenom, Role role, PersonneRepository personneRepository) {
