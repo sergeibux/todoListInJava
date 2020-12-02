@@ -1,7 +1,7 @@
-package Groupe2.To_do_list.Controller;
+package groupe2.to_do_list.controller;
 
-import Groupe2.To_do_list.Entity.Role;
-import Groupe2.To_do_list.Service.RoleService;
+import groupe2.to_do_list.entity.Role;
+import groupe2.to_do_list.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ import javax.persistence.*;
 @RequestMapping(path="/role")
 public class RoleController {
     @Autowired
-    private Groupe2.To_do_list.Repository.RoleRepository roleRepository;
+    private groupe2.to_do_list.repository.RoleRepository roleRepository;
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Role> getAllRoles () {

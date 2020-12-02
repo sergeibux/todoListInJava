@@ -1,6 +1,6 @@
-package Groupe2.To_do_list.Repository;
+package groupe2.to_do_list.repository;
 
-import Groupe2.To_do_list.Entity.Status;
+import groupe2.to_do_list.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
