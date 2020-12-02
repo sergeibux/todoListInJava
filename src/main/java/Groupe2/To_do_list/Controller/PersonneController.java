@@ -1,7 +1,7 @@
 package Groupe2.To_do_list.Controller;
 
 import Groupe2.To_do_list.Entity.Personne;
-
+import Groupe2.To_do_list.Entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,23 +15,36 @@ import java.util.*;
 
 import javax.persistence.*;
 
-@Controller // This means that this class is a Controller
-@RequestMapping(path="/") // This means URL's start with /demo (after Application path)
+@Controller
+@RequestMapping(path="/personne")
 public class PersonneController {
     @Autowired
     private Groupe2.To_do_list.Repository.PersonneRepository personneRepository;
+    @Autowired
+	private Groupe2.To_do_list.Repository.RoleRepository roleRepository;
 
-//    @GetMapping(path="/personne") // Map ONLY GET Requests
-//    public @ResponseBody String getPersonne (@RequestParam int id) {
-//        Personne p = new Personne();
-//        return p.to_string();
-//    }
-//    
-//    @PostMapping(path="/add_Personne") // Map ONLY GET Requests
-//    public @ResponseBody String addNewUser (@RequestParam String nom, @RequestParam String prenom, Role role) {
-//        Client n = new Client();
-//        if (n.saveClient(nom, prenom, ClientRepository)) {
-//            return "Saved";
-//        }else return "Error";
-//    }
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<Personne> getAllPersonnes () {
+        return personneRepository.findAll();
+    }
+    
+    @GetMapping(path="/byId")
+    public @ResponseBody String getPersonne (@RequestParam int id) {
+        Personne p = personneRepository.findById(id).get();
+        return p.to_string();
+    }
+    
+    @PostMapping(path="/add")
+    public @ResponseBody String addNewUser (
+    		@RequestParam String nom, 
+    		@RequestParam String prenom, 
+    		@RequestParam int roleId) {
+    	
+    	Role r = roleRepository.findById(roleId).get();
+        
+    	Personne p = new Personne();
+        if (p.savePersonne(nom, prenom, r, personneRepository)) {
+            return "Saved";
+        }else return "Error";
+    }
 }

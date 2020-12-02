@@ -2,7 +2,6 @@ package Groupe2.To_do_list.Entity;
 
 import Groupe2.To_do_list.Repository.RoleRepository;
 import javax.persistence.*;
-
 import java.util.Date;
 
 @Entity
