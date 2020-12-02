@@ -30,8 +30,14 @@ public class PersonneController {
     
     @GetMapping(path="/byId")
     public @ResponseBody String getPersonne (@RequestParam int id) {
-        Personne p = personneRepository.findById(id).get();
-        return p.to_string();
+
+        Optional<Personne> optionalPersonne = personneRepository.findById(id);
+        if (optionalPersonne.isPresent()){
+            Personne p = optionalPersonne.get();
+            return p.to_string();
+        }else {
+            return "Error";
+        }
     }
     
     @PostMapping(path="/add")
