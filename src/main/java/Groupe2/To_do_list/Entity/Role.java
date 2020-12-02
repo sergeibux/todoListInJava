@@ -8,16 +8,16 @@ public class Role {
 	public Role() {	}
 	
 	public Role(String nom) {
-		this.Nom = nom;
+		this.nom = nom;
 	}
 	
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer Id_Role;
-    private String Nom;
+    private Integer id_Role;
+    private String nom;
 
     public String to_string() {
-    	return "Role :> ID : " + this.Id_Role 
-    + " :> Nom : " + Nom; 
+    	return "Role :> ID : " + this.id_Role 
+    + " :> Nom : " + nom; 
     }
 }
