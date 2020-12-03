@@ -23,7 +23,6 @@ public class PersonneValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nom", "NotEmpty.appUserForm.userName");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "prenom", "NotEmpty.appUserForm.firstName");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.appUserForm.password");
-
     }
 
 }

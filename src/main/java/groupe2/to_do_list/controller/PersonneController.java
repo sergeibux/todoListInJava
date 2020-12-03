@@ -84,10 +84,25 @@ public class PersonneController {
     public String connexionpage(Model model) {
 
         Personne form = new Personne();
-
+        model.addAttribute("title", "Ajouter une personne");
         model.addAttribute("appUserForm", form);
 
         return "addpersonne";
+    }
+
+    @RequestMapping(value = "/updatepersonne", method = RequestMethod.GET)
+    public String updatepersonne(@RequestParam int id, Model model) {
+
+        Optional<Personne> optionalPersonne = personneRepository.findById(id);
+        if (optionalPersonne.isPresent()){
+            Personne form = optionalPersonne.get();
+            model.addAttribute("title", "Mettre a jours une personne");
+            model.addAttribute("appUserForm", form);
+
+            return "addpersonne";
+        }else {
+            return "Error";
+        }
     }
 
     // This method is called to save the registration information.
@@ -104,10 +119,18 @@ public class PersonneController {
             return "addpersonne";
         }
         try {
-            PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), null, personneRepository);
+
+            if (appUserForm.getId_Personne() == null){
+                System.out.println("toto");
+                PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), null, personneRepository);
+            } else {
+
+                //update
+            }
         }
         // Other error!!
         catch (Exception e) {
+            System.out.println("error");
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
             return "addpersonne";
         }
