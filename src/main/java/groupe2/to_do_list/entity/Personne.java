@@ -7,10 +7,11 @@ public class Personne {
 	
 	public Personne() {}
 	
-	public Personne(String nom, String prenom, Role role) {
+	public Personne(String nom, String prenom, String password, Role role) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.role = role;
+		this.password = password;
 	}
 
     @Id
@@ -19,14 +20,16 @@ public class Personne {
 
     private String nom;
     private String prenom;
+    private String password;
 
     @OneToOne
     private Role role;
 
-    public String to_string() {
+    public String toString() {
     	return "Personne :> ID : " + this.id_Personne 
     + " :> Nom : " + nom 
-    + " :> Prénom : " + prenom 
+    + " :> Prénom : " + prenom
+    + " :> Mot de passe : " + password
     + " :> Role : " + role.toString();
     }
 
@@ -52,6 +55,14 @@ public class Personne {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Role getRole() {

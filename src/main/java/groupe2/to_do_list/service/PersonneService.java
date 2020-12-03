@@ -5,9 +5,9 @@ import groupe2.to_do_list.repository.PersonneRepository;
 import groupe2.to_do_list.entity.Personne;
 
 public class PersonneService{
-	public static boolean savePersonne(String nom, String prenom, Role role, PersonneRepository personneRepository) {
+	public static boolean savePersonne(String nom, String prenom, String password, Role role, PersonneRepository personneRepository) {
 	    try {
-	    	Personne personne = new Personne(nom, prenom, role);
+	    	Personne personne = new Personne(nom, prenom, password, role);
 	    	
 	    	personneRepository.save(personne);
 	        return true;

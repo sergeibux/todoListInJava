@@ -34,7 +34,7 @@ public class PersonneController {
         Optional<Personne> optionalPersonne = personneRepository.findById(id);
         if (optionalPersonne.isPresent()){
             Personne p = optionalPersonne.get();
-            return p.to_string();
+            return p.toString();
         }else {
             return "Error";
         }
@@ -44,12 +44,12 @@ public class PersonneController {
     public @ResponseBody String addNewUser (
     		@RequestParam String nom, 
     		@RequestParam String prenom, 
+    		@RequestParam String password, 
     		@RequestParam int roleId) {
     	
     	Role r = roleRepository.findById(roleId).get();
         
-//    	Personne p = new Personne();
-        if (PersonneService.savePersonne(nom, prenom, r, personneRepository)) {
+        if (PersonneService.savePersonne(nom, prenom, password, r, personneRepository)) {
             return "Saved";
         }else return "Error";
     }
