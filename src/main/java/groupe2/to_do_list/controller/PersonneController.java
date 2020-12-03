@@ -7,12 +7,11 @@ import groupe2.to_do_list.service.PersonneService;
 import groupe2.to_do_list.entity.Personne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.*;
@@ -59,5 +58,40 @@ public class PersonneController {
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "greeting";
+    }
+
+    // Show Register page.
+    @RequestMapping(value = "/connexionpage", method = RequestMethod.GET)
+    public String connexionpage(Model model) {
+
+        Personne form = new Personne();
+
+        model.addAttribute("appUserForm", form);
+
+        return "connexionpage";
+    }
+
+    // This method is called to save the registration information.
+    // @Validated: To ensure that this Form
+    // has been Validated before this method is invoked.
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String saveRegister(Model model, //
+                               @ModelAttribute("appUserForm") @Validated Personne appUserForm, //
+                               BindingResult result, //
+                               final RedirectAttributes redirectAttributes) {
+
+        // Validate result
+        if (result.hasErrors()) {
+            return "connexionpage";
+        }
+        try {
+            PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), null, personneRepository);
+        }
+        // Other error!!
+        catch (Exception e) {
+            model.addAttribute("errorMessage", "Error: " + e.getMessage());
+            return "connexionpage";
+        }
+        return "redirect:/registerSuccessful";
     }
 }
