@@ -125,8 +125,7 @@ public class PersonneController {
         try {
 
             if (appUserForm.getId_Personne() == null){
-                System.out.println("toto");
-                PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), null, personneRepository);
+                PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), appUserForm.getRole(), personneRepository);
             } else {
 
                 //update
