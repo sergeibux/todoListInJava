@@ -84,6 +84,8 @@ public class PersonneController {
     public String connexionpage(Model model) {
 
         Personne form = new Personne();
+        List<Role> roles = roleRepository.findAll();
+        model.addAttribute("Roles", roles);
         model.addAttribute("title", "Ajouter une personne");
         model.addAttribute("appUserForm", form);
 
@@ -96,6 +98,8 @@ public class PersonneController {
         Optional<Personne> optionalPersonne = personneRepository.findById(id);
         if (optionalPersonne.isPresent()){
             Personne form = optionalPersonne.get();
+            List<Role> roles = roleRepository.findAll();
+            model.addAttribute("Roles", roles);
             model.addAttribute("title", "Mettre a jours une personne");
             model.addAttribute("appUserForm", form);
 
