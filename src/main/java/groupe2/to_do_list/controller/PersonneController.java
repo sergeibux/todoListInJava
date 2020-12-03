@@ -54,6 +54,25 @@ public class PersonneController {
         }else return "Error";
     }
 
+    @GetMapping("/connect")
+    public String connect(Model model) {
+        model.addAttribute("alert", "");
+        return "connect";
+    }
+    
+    @GetMapping("submit")
+    public String submitConnection(@RequestParam(name="user", required=true, defaultValue="") String user,
+    		@RequestParam(name="pwd", required=true, defaultValue="") String pwd,
+    		Model model) {
+    	if ((pwd == "") || (user == "")){
+          model.addAttribute("alert", "Veuillez remplir tous les champs !");
+          return "connect";
+    	}
+    	model.addAttribute("msg", "Bonjour " + user);
+		return "connect";
+    	
+    }
+
     @GetMapping("/toto")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
