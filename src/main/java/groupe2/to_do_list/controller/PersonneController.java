@@ -60,4 +60,10 @@ public class PersonneController {
         model.addAttribute("name", name);
         return "greeting";
     }
+
+    @GetMapping("/new")
+    public void newSubscriber(Model model) {
+//        model.addAttribute("name", name);
+//        return "";
+    }
 }
