@@ -123,6 +123,12 @@ public class PersonneController {
         }
     }
 
+
+    @RequestMapping(value = "/deletepersone", method = RequestMethod.GET)
+    public void deletepersone(@RequestParam int id, Model model) {
+        PersonneService.deleteUser(id, personneRepository);
+    }
+
     // This method is called to save the registration information.
     // @Validated: To ensure that this Form
     // has been Validated before this method is invoked.

@@ -65,9 +65,9 @@ public class PersonneService {
         return true;
     }
 
-    public static boolean deleteUser(Personne personne, PersonneRepository personneRepository) {
+    public static boolean deleteUser(int id_personne, PersonneRepository personneRepository) {
         try {
-            Optional<Personne> personneToDelete = personneRepository.findById(personne.getId_Personne());
+            Optional<Personne> personneToDelete = personneRepository.findById(id_personne);
             if (personneToDelete.isPresent()) {
                 Personne personneDeleted = personneToDelete.get();
 
