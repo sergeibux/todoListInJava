@@ -55,21 +55,35 @@ public class PersonneController {
     }
 
     @GetMapping("/connect")
-    public String connect(Model model) {
-        model.addAttribute("alert", "");
+    public String connect(@RequestParam(name="msg", required=false, defaultValue="") String msg,
+    		@RequestParam(name="err", required=false, defaultValue="") String err,
+    		Model model) {
+    	Personne form = new Personne();
+        model.addAttribute("msg", msg);
+        model.addAttribute("err", err);
+        model.addAttribute("appConnectForm", form);
         return "connect";
     }
     
-    @GetMapping("submit")
-    public String submitConnection(@RequestParam(name="user", required=true, defaultValue="") String user,
-    		@RequestParam(name="pwd", required=true, defaultValue="") String pwd,
-    		Model model) {
-    	if ((pwd == "") || (user == "")){
-          model.addAttribute("alert", "Veuillez remplir tous les champs !");
-          return "connect";
-    	}
-    	model.addAttribute("msg", "Bonjour " + user);
-		return "connect";
+    @RequestMapping(value = "/submitConnection", method = RequestMethod.POST)
+    public String submitConnection(@ModelAttribute("appConnectForm") @Validated Personne appConnectForm,
+            BindingResult result,
+            final RedirectAttributes redirectAttributes,
+            Model model) {
+    	if (result.hasErrors()) {
+    		String err = "Veuillez vérifier vos données !";
+    		return "redirect:/personne/connect?err=" + err;
+        }
+        try {
+        	String prenom = appConnectForm.getNom();
+        	return "redirect:/personne/connect?msg=" + prenom;
+        }
+        // Other error!!
+        catch (Exception e) {
+        	String err = "Error: " + e.getMessage();
+//        	model.addAttribute("errorMessage", "Error: " + e.getMessage());
+        	return "redirect:/personne/connect?err=" + err;
+        }
     	
     }
 
