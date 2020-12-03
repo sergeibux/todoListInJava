@@ -10,7 +10,7 @@ public class PersonneService {
     public static boolean savePersonne(String nom, String prenom, String password, Role role,
                                        PersonneRepository personneRepository) {
         try {
-            Personne personne = new Personne(nom, prenom,password, role);
+            Personne personne = new Personne(nom, prenom, password, role);
 
             personneRepository.save(personne);
             return true;
@@ -47,41 +47,13 @@ public class PersonneService {
         return personneRole.getNom().equals("admin");
     }
 
-    public static boolean deleteUserIfAdmin(Personne personne, String nom, String prenom, String password,
-                                            Role role, PersonneRepository personneRepository) {
+    public static boolean deleteUserIfAdmin(Personne personne, PersonneRepository personneRepository) {
         Boolean isAdmin = checkIfPersonneIsAdmin(personne);
         if (isAdmin) {
-                try {
-                    Optional<Personne> personneToDelete = personneRepository.findById(personne.getId_Personne());
-                    if (personneToDelete.isPresent()) {
-                        Personne personneDeleted = personneToDelete.get();
-                        personneDeleted.setNom(nom);
-                        personneDeleted.setPrenom(prenom);
-                        personneDeleted.setPassword(password);
-                        personneDeleted.setRole(role);
-
-
-                        personneRepository.delete(personneDeleted);
-
-                    }
-            } catch (Exception e) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static boolean deleteUser(Personne personne, String nom, String prenom, String password,
-                                            Role role, PersonneRepository personneRepository) {
-           try {
+            try {
                 Optional<Personne> personneToDelete = personneRepository.findById(personne.getId_Personne());
                 if (personneToDelete.isPresent()) {
                     Personne personneDeleted = personneToDelete.get();
-                    personneDeleted.setNom(nom);
-                    personneDeleted.setPrenom(prenom);
-                    personneDeleted.setPassword(password);
-                    personneDeleted.setRole(role);
-
 
                     personneRepository.delete(personneDeleted);
 
@@ -89,6 +61,22 @@ public class PersonneService {
             } catch (Exception e) {
                 return false;
             }
+        }
+        return true;
+    }
+
+    public static boolean deleteUser(Personne personne, PersonneRepository personneRepository) {
+        try {
+            Optional<Personne> personneToDelete = personneRepository.findById(personne.getId_Personne());
+            if (personneToDelete.isPresent()) {
+                Personne personneDeleted = personneToDelete.get();
+
+                personneRepository.delete(personneDeleted);
+
+            }
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 }
