@@ -125,9 +125,10 @@ public class PersonneController {
     }
 
 
-    @RequestMapping(value = "/deletepersone", method = RequestMethod.GET)
-    public void deletepersone(@RequestParam int id, Model model) {
+    @RequestMapping(value = "/deletepersonne", method = RequestMethod.GET)
+    public String deletepersonne(@RequestParam int id, Model model) {
         PersonneService.deleteUser(id, personneRepository);
+        return "deletepersonne";
     }
 
     // This method is called to save the registration information.

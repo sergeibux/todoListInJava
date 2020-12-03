@@ -12,7 +12,8 @@ public class PersonneService {
                                        PersonneRepository personneRepository, RoleRepository roleRepository) {
         try {
             if (role == null) {
-                Optional<Role> role1 = roleRepository.findById(13);
+//TODO récupérer l'id réel dans la bdd
+            	Optional<Role> role1 = roleRepository.findById(13);
                 if (role1.isPresent()){
                     role = role1.get();
                 }
@@ -74,17 +75,20 @@ public class PersonneService {
     
     public static int getIdOnConnexion(String nom, String password, PersonneRepository personneRepository) {
     	Personne p = personneRepository.findByNomLike(nom);
-   	return p.getId_Personne();
+    	return p.getId_Personne();
+    }
 
     public static boolean deleteUser(int id_personne, PersonneRepository personneRepository) {
         try {
-            Optional<Personne> personneToDelete = personneRepository.findById(id_personne);
-            if (personneToDelete.isPresent()) {
-                Personne personneDeleted = personneToDelete.get();
-
-                personneRepository.delete(personneDeleted);
-
-            }
+        	Personne p = personneRepository.findById(id_personne).get();
+            personneRepository.delete(p);
+//            Optional<Personne> personneToDelete = personneRepository.findById(id_personne);
+//            if (personneToDelete.isPresent()) {
+//                Personne personneDeleted = personneToDelete.get();
+//
+//                personneRepository.delete(personneDeleted);
+//
+//            }
         } catch (Exception e) {
             return false;
         }
