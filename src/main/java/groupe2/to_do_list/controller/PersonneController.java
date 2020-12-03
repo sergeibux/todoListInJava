@@ -61,14 +61,14 @@ public class PersonneController {
     }
 
     // Show Register page.
-    @RequestMapping(value = "/connexionpage", method = RequestMethod.GET)
+    @RequestMapping(value = "/addpersonne", method = RequestMethod.GET)
     public String connexionpage(Model model) {
 
         Personne form = new Personne();
 
         model.addAttribute("appUserForm", form);
 
-        return "connexionpage";
+        return "addpersonne";
     }
 
     // This method is called to save the registration information.
@@ -82,7 +82,7 @@ public class PersonneController {
 
         // Validate result
         if (result.hasErrors()) {
-            return "connexionpage";
+            return "addpersonne";
         }
         try {
             PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), null, personneRepository);
@@ -90,8 +90,8 @@ public class PersonneController {
         // Other error!!
         catch (Exception e) {
             model.addAttribute("errorMessage", "Error: " + e.getMessage());
-            return "connexionpage";
+            return "addpersonne";
         }
-        return "redirect:/registerSuccessful";
+        return "redirect:/";
     }
 }
