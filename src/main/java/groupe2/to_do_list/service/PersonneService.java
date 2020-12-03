@@ -51,13 +51,44 @@ public class PersonneService {
                                             Role role, PersonneRepository personneRepository) {
         Boolean isAdmin = checkIfPersonneIsAdmin(personne);
         if (isAdmin) {
-            try {
-                Personne personneToDelete = new Personne(nom, prenom, password, role);
-                personneRepository.delete(personneToDelete);
+                try {
+                    Optional<Personne> personneToDelete = personneRepository.findById(personne.getId_Personne());
+                    if (personneToDelete.isPresent()) {
+                        Personne personneDeleted = personneToDelete.get();
+                        personneDeleted.setNom(nom);
+                        personneDeleted.setPrenom(prenom);
+                        personneDeleted.setPassword(password);
+                        personneDeleted.setRole(role);
+
+
+                        personneRepository.delete(personneDeleted);
+
+                    }
             } catch (Exception e) {
                 return false;
             }
         }
+        return true;
+    }
+
+    public static boolean deleteUser(Personne personne, String nom, String prenom, String password,
+                                            Role role, PersonneRepository personneRepository) {
+           try {
+                Optional<Personne> personneToDelete = personneRepository.findById(personne.getId_Personne());
+                if (personneToDelete.isPresent()) {
+                    Personne personneDeleted = personneToDelete.get();
+                    personneDeleted.setNom(nom);
+                    personneDeleted.setPrenom(prenom);
+                    personneDeleted.setPassword(password);
+                    personneDeleted.setRole(role);
+
+
+                    personneRepository.delete(personneDeleted);
+
+                }
+            } catch (Exception e) {
+                return false;
+            }
         return true;
     }
 }
