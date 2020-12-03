@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface PersonneRepository extends JpaRepository<Personne, Integer>{
-	Personne findByNomLike(String nom);
+	Personne findByNomAndPasswordLike(String nom, String password);
 }

@@ -9,8 +9,8 @@
 	<div class="msg" th:text="'Hello, ' + ${msg} + '!'"></div>
 	<!-- >div class="alert" th:text="'Hello, ' + ${alert} + '!'"></div-->
 
-	<div class="alert" th:if="${alert != null}"
-     th:utext="${alert}">...</div>
+	<div class="alert" th:if="${err != null}"
+     th:utext="${err}">...</div>
 
 	<div class="card id">	
 		<h5>Identifiez-vous</h5>

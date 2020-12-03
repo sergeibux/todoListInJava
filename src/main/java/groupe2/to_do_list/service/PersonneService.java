@@ -50,7 +50,6 @@ public class PersonneService {
     }
 
     public static boolean checkIfPersonneIsAdmin(Personne personne) {
-
         Role personneRole = personne.getRole();
         return personneRole.getNom().equals("admin");
     }
@@ -74,14 +73,16 @@ public class PersonneService {
     }
     
     public static int getIdOnConnexion(String nom, String password, PersonneRepository personneRepository) {
-    	Personne p = personneRepository.findByNomLike(nom);
+    	Personne p = personneRepository.findByNomAndPasswordLike(nom, password);
+    	if (p == null)
+    		return -1;
     	return p.getId_Personne();
     }
 
     public static boolean deleteUser(int id_personne, PersonneRepository personneRepository) {
         try {
         	Personne p = personneRepository.findById(id_personne).get();
-        	if (p.isPresent)
+        	if (p != null)
         		personneRepository.delete(p);
 //            Optional<Personne> personneToDelete = personneRepository.findById(id_personne);
 //            if (personneToDelete.isPresent()) {

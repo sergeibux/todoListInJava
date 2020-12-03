@@ -71,13 +71,18 @@ public class PersonneController {
             final RedirectAttributes redirectAttributes,
             Model model) {
     	if (result.hasErrors()) {
-    		String err = "Veuillez vérifier vos données !";
+    		String err = "Veuillez remplir tous les champs !";
     		return "redirect:/personne/connect?err=" + err;
         }
         try {
         	int id = PersonneService.getIdOnConnexion(appConnectForm.getNom(), appConnectForm.getPassword(), personneRepository);
-//        	String prenom = appConnectForm.getNom();
-        	return "redirect:/personne/connect?msg=" + id;
+        	if (id == -1){
+        		String err = "Mauvais identifiant / mot de passe !";
+        		return "redirect:/personne/connect?err=" + err;
+            }
+        		
+        	String prenom = appConnectForm.getNom();
+        	return "redirect:/personne/connect?msg=" + prenom;
         }
         // Other error!!
         catch (Exception e) {
