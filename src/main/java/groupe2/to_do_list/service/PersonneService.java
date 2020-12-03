@@ -3,13 +3,20 @@ package groupe2.to_do_list.service;
 import groupe2.to_do_list.entity.Role;
 import groupe2.to_do_list.repository.PersonneRepository;
 import groupe2.to_do_list.entity.Personne;
+import groupe2.to_do_list.repository.RoleRepository;
 
 import java.util.Optional;
 
 public class PersonneService {
     public static boolean savePersonne(String nom, String prenom, String password, Role role,
-                                       PersonneRepository personneRepository) {
+                                       PersonneRepository personneRepository, RoleRepository roleRepository) {
         try {
+            if (role == null) {
+                Optional<Role> role1 = roleRepository.findById(13);
+                if (role1.isPresent()){
+                    role = role1.get();
+                }
+            }
             Personne personne = new Personne(nom, prenom, password, role);
 
             personneRepository.save(personne);

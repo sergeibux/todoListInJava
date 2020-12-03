@@ -49,7 +49,7 @@ public class PersonneController {
     	
     	Role r = roleRepository.findById(roleId).get();
         
-        if (PersonneService.savePersonne(nom, prenom, password, r, personneRepository)) {
+        if (PersonneService.savePersonne(nom, prenom, password, r, personneRepository, roleRepository)) {
             return "Saved";
         }else return "Error";
     }
@@ -95,7 +95,7 @@ public class PersonneController {
 
     // Show Register page.
     @RequestMapping(value = "/addpersonne", method = RequestMethod.GET)
-    public String connexionpage(Model model) {
+    public String addpersonne(Model model) {
 
         Personne form = new Personne();
         List<Role> roles = roleRepository.findAll();
@@ -145,7 +145,7 @@ public class PersonneController {
         try {
 
             if (appUserForm.getId_Personne() == null){
-                PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), appUserForm.getRole(), personneRepository);
+                PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), appUserForm.getRole(), personneRepository, roleRepository);
             } else {
 
                 //update
@@ -159,4 +159,13 @@ public class PersonneController {
         }
         return "redirect:/";
     }
+
+    // Show Register page.
+    @RequestMapping(value = "/listpersonne", method = RequestMethod.GET)
+    public String listpersonne(Model model) {
+        List<Personne> personnes = personneRepository.findAll();
+        model.addAttribute("userList", personnes);
+        return "listpersonne";
+    }
+
 }
