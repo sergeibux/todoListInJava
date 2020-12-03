@@ -13,6 +13,8 @@ public class Status {
 
     private String nom;
 
+    public Status () {}
+    
     public Status (String nom) {
      this.nom = nom;
     }

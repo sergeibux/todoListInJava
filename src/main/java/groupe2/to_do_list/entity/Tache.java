@@ -6,6 +6,23 @@ import java.util.Date;
 @Entity
 public class Tache {
 
+	public Tache() {}
+	
+	public Tache(
+			String titre,
+			String texte,
+			Date date_creation,
+			Personne personne,
+			Personne personne_creation,
+			Status status) {
+		this.titre = titre;
+		this.texte = texte;
+		this.date_creation = date_creation;
+		this.personne = personne;
+		this.personne_creation = personne_creation;
+		this.status = status;
+	}
+	
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id_Tache;
