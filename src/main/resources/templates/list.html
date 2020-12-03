@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <title>Todolit : nouvel inscrit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+	<div class="msg" th:text="'Hello, ' + ${msg} + '!'"></div>
+	<!-- >div class="alert" th:text="'Hello, ' + ${alert} + '!'"></div-->
+
+	<div class="alert" th:if="${err != null}"
+     th:utext="${err}">...</div>
+
+	<div class="list">	
+		<h5>To do list</h5>
+
+		<div class="card task">	
+			<p>new card</p>
+		</div>
+
+	</div>
+
+	<div class="list">	
+		<h5>Done list</h5>
+
+		<div class="card task">	
+			<p>first card</p>
+		</div>
+
+	</div>
+</body>
+</html>
+
