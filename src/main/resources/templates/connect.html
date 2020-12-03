@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <title>Todolit : nouvel inscrit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+	<div class="msg" th:text="'Hello, ' + ${msg} + '!'"></div>
+	<!-- >div class="alert" th:text="'Hello, ' + ${alert} + '!'"></div-->
+
+	<div class="alert" th:if="${alert != null}"
+     th:utext="${alert}">...</div>
+
+	<div class="card id">	
+		<h5>Identifiez-vous</h5>
+		
+		<form th:action="@{/personne/submitConnection}" th:object="${appConnectForm}" method="POST">
+			<label for="user">Nom d'utilisateur :</label><br>
+            <input type="text" th:field="*{nom}" /><br>
+			<label for="pwd">Mot de passe :</label><br>
+            <input type="password" th:field="*{password}" /> <br><br>
+  			<input type="submit" name="valider"><br>
+		</form>
+	</div>
+</body>
+</html>
+

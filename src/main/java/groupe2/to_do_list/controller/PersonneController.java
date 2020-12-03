@@ -75,8 +75,9 @@ public class PersonneController {
     		return "redirect:/personne/connect?err=" + err;
         }
         try {
-        	String prenom = appConnectForm.getNom();
-        	return "redirect:/personne/connect?msg=" + prenom;
+        	int id = PersonneService.getIdOnConnexion(appConnectForm.getNom(), appConnectForm.getPassword(), personneRepository);
+//        	String prenom = appConnectForm.getNom();
+        	return "redirect:/personne/connect?msg=" + id;
         }
         // Other error!!
         catch (Exception e) {

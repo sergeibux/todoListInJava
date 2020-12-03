@@ -60,4 +60,9 @@ public class PersonneService {
         }
         return true;
     }
+    
+    public static int getIdOnConnexion(String nom, String password, PersonneRepository personneRepository) {
+    	Personne p = personneRepository.findByNomLike(nom);
+    	return p.getId_Personne();
+    }
 }

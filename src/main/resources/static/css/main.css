@@ -1,0 +1,33 @@
+.card {
+	background: linear-gradient(#E3E8FF, #b2c0e1);
+	border-radius: 35px;
+	border: double 2px #7076C3;
+}
+
+.id{
+	max-height: 60%;
+	width: 26%;
+	position: fixed;
+	text-align: center;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	top: 20%;
+	left: 37%;
+}
+
+.msg{
+	position: fixed;
+	width: 100%;
+	text-align: right;
+	top: 1%;
+	right: 1%;
+	color: darkblue;
+}
+
+.alert{
+	position: fixed;
+	width: 100%;
+	text-align: center;
+	top: 9%;
+	color: red;
+}
