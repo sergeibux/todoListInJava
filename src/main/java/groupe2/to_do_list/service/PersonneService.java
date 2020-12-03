@@ -81,7 +81,8 @@ public class PersonneService {
     public static boolean deleteUser(int id_personne, PersonneRepository personneRepository) {
         try {
         	Personne p = personneRepository.findById(id_personne).get();
-            personneRepository.delete(p);
+        	if (p.isPresent)
+        		personneRepository.delete(p);
 //            Optional<Personne> personneToDelete = personneRepository.findById(id_personne);
 //            if (personneToDelete.isPresent()) {
 //                Personne personneDeleted = personneToDelete.get();
