@@ -3,14 +3,21 @@ package groupe2.to_do_list.service;
 import groupe2.to_do_list.entity.Role;
 import groupe2.to_do_list.repository.PersonneRepository;
 import groupe2.to_do_list.entity.Personne;
+import groupe2.to_do_list.repository.RoleRepository;
 
 import java.util.Optional;
 
 public class PersonneService {
     public static boolean savePersonne(String nom, String prenom, String password, Role role,
-                                       PersonneRepository personneRepository) {
+                                       PersonneRepository personneRepository, RoleRepository roleRepository) {
         try {
-            Personne personne = new Personne(nom, prenom,password, role);
+            if (role == null) {
+                Optional<Role> role1 = roleRepository.findById(13);
+                if (role1.isPresent()){
+                    role = role1.get();
+                }
+            }
+            Personne personne = new Personne(nom, prenom, password, role);
 
             personneRepository.save(personne);
             return true;
@@ -47,13 +54,17 @@ public class PersonneService {
         return personneRole.getNom().equals("admin");
     }
 
-    public static boolean deleteUserIfAdmin(Personne personne, String nom, String prenom, String password,
-                                            Role role, PersonneRepository personneRepository) {
+    public static boolean deleteUserIfAdmin(Personne personne, PersonneRepository personneRepository) {
         Boolean isAdmin = checkIfPersonneIsAdmin(personne);
         if (isAdmin) {
             try {
-                Personne personneToDelete = new Personne(nom, prenom, password, role);
-                personneRepository.delete(personneToDelete);
+                Optional<Personne> personneToDelete = personneRepository.findById(personne.getId_Personne());
+                if (personneToDelete.isPresent()) {
+                    Personne personneDeleted = personneToDelete.get();
+
+                    personneRepository.delete(personneDeleted);
+
+                }
             } catch (Exception e) {
                 return false;
             }
@@ -63,6 +74,20 @@ public class PersonneService {
     
     public static int getIdOnConnexion(String nom, String password, PersonneRepository personneRepository) {
     	Personne p = personneRepository.findByNomLike(nom);
-    	return p.getId_Personne();
+   	return p.getId_Personne();
+
+    public static boolean deleteUser(int id_personne, PersonneRepository personneRepository) {
+        try {
+            Optional<Personne> personneToDelete = personneRepository.findById(id_personne);
+            if (personneToDelete.isPresent()) {
+                Personne personneDeleted = personneToDelete.get();
+
+                personneRepository.delete(personneDeleted);
+
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }
