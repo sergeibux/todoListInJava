@@ -74,6 +74,7 @@ public class PersonneService {
     
     public static int getIdOnConnexion(String nom, String password, PersonneRepository personneRepository) {
     	Personne p = personneRepository.findByNomAndPasswordLike(nom, password);
+    	
     	if (p == null)
     		return -1;
     	return p.getId_Personne();

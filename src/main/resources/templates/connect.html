@@ -6,8 +6,6 @@
 	<link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-	<div class="msg" th:text="'Hello, ' + ${msg} + '!'"></div>
-	<!-- >div class="alert" th:text="'Hello, ' + ${alert} + '!'"></div-->
 
 	<div class="alert" th:if="${err != null}"
      th:utext="${err}">...</div>

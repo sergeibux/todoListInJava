@@ -1,7 +1,25 @@
-.card {
-	background: linear-gradient(#E3E8FF, #b2c0e1);
+.list {
+	background: linear-gradient(#e2e0f1, #E6EAFF);
+	width: 290px;
 	border-radius: 35px;
+	border: double 2px #A0A6F3;
+	padding: 25px;
+	spacing: 150px; 
+}
+
+.card {
+	background: linear-gradient(#E6EBFF, #b5c3e4);
+	border-radius: 30px;
 	border: double 2px #7076C3;
+}
+
+.task{
+	max-height: 30px;
+	width: 90%;
+	position: relative;
+	text-align: center;
+	padding-top: 5px;
+	left: 10%;
 }
 
 .id{

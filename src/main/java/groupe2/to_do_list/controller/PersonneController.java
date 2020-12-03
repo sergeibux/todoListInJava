@@ -12,7 +12,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 
 import java.util.*;
 
@@ -55,13 +56,13 @@ public class PersonneController {
     }
 
     @GetMapping("/connect")
-    public String connect(@RequestParam(name="msg", required=false, defaultValue="") String msg,
+    public String connect(
     		@RequestParam(name="err", required=false, defaultValue="") String err,
     		Model model) {
-    	Personne form = new Personne();
-        model.addAttribute("msg", msg);
+    	Personne p = new Personne();
+    	
         model.addAttribute("err", err);
-        model.addAttribute("appConnectForm", form);
+        model.addAttribute("appConnectForm", p);
         return "connect";
     }
     
@@ -69,6 +70,7 @@ public class PersonneController {
     public String submitConnection(@ModelAttribute("appConnectForm") @Validated Personne appConnectForm,
             BindingResult result,
             final RedirectAttributes redirectAttributes,
+            HttpServletResponse response,
             Model model) {
     	if (result.hasErrors()) {
     		String err = "Veuillez remplir tous les champs !";
@@ -80,9 +82,11 @@ public class PersonneController {
         		String err = "Mauvais identifiant / mot de passe !";
         		return "redirect:/personne/connect?err=" + err;
             }
-        		
-        	String prenom = appConnectForm.getNom();
-        	return "redirect:/personne/connect?msg=" + prenom;
+        	
+        	Cookie cookieId = new Cookie("id", String.valueOf(id));
+        	response.addCookie(cookieId);
+        	
+        	return "redirect:/personne/list";
         }
         // Other error!!
         catch (Exception e) {
@@ -92,6 +96,21 @@ public class PersonneController {
         }
     	
     }
+    
+    @GetMapping("/list")
+    public String list(
+    		@RequestParam(name="err", required=false, defaultValue="") String err,
+    		@CookieValue(value="id", defaultValue="") String id,
+    		Model model) {
+    	Personne p = personneRepository.findById(Integer.parseInt(id)).get();
+    	
+    	System.out.println("nom = " + p.getNom());
+    	System.out.println("prenom = " + p.getPrenom());
+    	
+        model.addAttribute("msg", p.getPrenom());
+        model.addAttribute("err", err); 
+        return "list";
+    }    
 
     @GetMapping("/toto")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
