@@ -71,3 +71,11 @@ body{
 	top: 9%;
 	color: red;
 }
+
+.addbtn{
+	position: fixed;
+	right : 1%;
+	bottom: 1%;
+	height: 70px;
+	width: 140px;
+}
