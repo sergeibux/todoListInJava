@@ -40,6 +40,9 @@ public class TacheService {
                 tacheUpdated.setDateModification(dateModification);
                 tacheUpdated.setPersonneCreation(personneCreation);
                 tacheUpdated.setStatus(status);
+
+                tacheRepository.save(tacheUpdated);
+
             }
 
         } catch (Exception e) {
@@ -49,7 +52,7 @@ public class TacheService {
 
     }
 
-    public static boolean deleteUser(int idTache, TacheRepository tacheRepository) {
+    public static boolean deleteTache(int idTache, TacheRepository tacheRepository) {
         try {
             Tache t = tacheRepository.findById(idTache).get();
             if (t != null)
