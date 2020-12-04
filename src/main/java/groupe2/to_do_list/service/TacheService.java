@@ -29,7 +29,7 @@ public class TacheService {
     }
 
     public static boolean updateTache(Tache tache, TacheRepository tacheRepository, String titre, String texte,
-                                      LocalDateTime dateModification, Personne personneCreation, Status status) {
+                                      Personne personne, Status status) {
 
         try {
             Optional<Tache> tacheToUpdate = tacheRepository.findById(tache.getIdTache());
@@ -37,8 +37,8 @@ public class TacheService {
                 Tache tacheUpdated = tacheToUpdate.get();
                 tacheUpdated.setTitre(titre);
                 tacheUpdated.setTexte(texte);
-                tacheUpdated.setDateModification(dateModification);
-                tacheUpdated.setPersonneCreation(personneCreation);
+                tacheUpdated.setDateModification(LocalDateTime.now());
+                tacheUpdated.setPersonne(personne);
                 tacheUpdated.setStatus(status);
 
                 tacheRepository.save(tacheUpdated);
