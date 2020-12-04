@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Status {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id_Status;
+    private Integer idStatus;
 
     private String nom;
 
@@ -19,12 +19,12 @@ public class Status {
      this.nom = nom;
     }
 
-    public Integer getId_Status() {
-        return id_Status;
+    public Integer getIdStatus() {
+        return idStatus;
     }
 
-    public void setId_Status(Integer id_Status) {
-        this.id_Status = id_Status;
+    public void setId_Status(Integer idStatus) {
+        this.idStatus = idStatus;
     }
 
     public String getNom() {
