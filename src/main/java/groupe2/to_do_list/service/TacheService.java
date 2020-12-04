@@ -1,5 +1,7 @@
 package groupe2.to_do_list.service;
 
+import groupe2.to_do_list.entity.Role;
+import groupe2.to_do_list.repository.PersonneRepository;
 import groupe2.to_do_list.repository.TacheRepository;
 import groupe2.to_do_list.entity.Tache;
 import groupe2.to_do_list.entity.Personne;
