@@ -11,12 +11,12 @@ public class Role {
 		this.nom = nom;
 	}
 
-    public Integer getId_Role() {
-        return id_Role;
+    public Integer getIdRole() {
+        return idRole;
     }
 
-    public void setId_Role(Integer id_Role) {
-        this.id_Role = id_Role;
+    public void setIdRole(Integer idRole) {
+        this.idRole = idRole;
     }
 
     public String getNom() {
@@ -29,11 +29,11 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id_Role;
+    private Integer idRole;
     private String nom;
 
     public String toString() {
-    	return "Role :> ID : " + this.id_Role 
+    	return "Role :> ID : " + this.idRole 
     + " :> Nom : " + nom; 
     }
 }

@@ -31,7 +31,7 @@ public class PersonneService {
                                          String nom, String prenom, String password, Role role) {
 
         try {
-            Optional<Personne> personneToUpdate = personneRepository.findById(personne.getId_Personne());
+            Optional<Personne> personneToUpdate = personneRepository.findById(personne.getIdPersonne());
             if (personneToUpdate.isPresent()) {
                 Personne personneUpdated = personneToUpdate.get();
                 personneUpdated.setNom(nom);
@@ -58,7 +58,7 @@ public class PersonneService {
         Boolean isAdmin = checkIfPersonneIsAdmin(personne);
         if (isAdmin) {
             try {
-                Optional<Personne> personneToDelete = personneRepository.findById(personne.getId_Personne());
+                Optional<Personne> personneToDelete = personneRepository.findById(personne.getIdPersonne());
                 if (personneToDelete.isPresent()) {
                     Personne personneDeleted = personneToDelete.get();
 
@@ -77,15 +77,15 @@ public class PersonneService {
     	
     	if (p == null)
     		return -1;
-    	return p.getId_Personne();
+    	return p.getIdPersonne();
     }
 
-    public static boolean deleteUser(int id_personne, PersonneRepository personneRepository) {
+    public static boolean deleteUser(int idPersonne, PersonneRepository personneRepository) {
         try {
-        	Personne p = personneRepository.findById(id_personne).get();
+        	Personne p = personneRepository.findById(idPersonne).get();
         	if (p != null)
         		personneRepository.delete(p);
-//            Optional<Personne> personneToDelete = personneRepository.findById(id_personne);
+//            Optional<Personne> personneToDelete = personneRepository.findById(idPersonne);
 //            if (personneToDelete.isPresent()) {
 //                Personne personneDeleted = personneToDelete.get();
 //

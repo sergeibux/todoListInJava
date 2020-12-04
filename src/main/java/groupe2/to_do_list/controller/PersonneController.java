@@ -155,7 +155,7 @@ public class PersonneController {
         }
         try {
 
-            if (appUserForm.getId_Personne() == null){
+            if (appUserForm.getIdPersonne() == null){
                 PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), appUserForm.getRole(), personneRepository, roleRepository);
             } else {
                 //update
