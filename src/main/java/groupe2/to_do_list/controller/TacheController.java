@@ -1,13 +1,11 @@
 package groupe2.to_do_list.controller;
 
 import groupe2.to_do_list.entity.Tache;
-import groupe2.to_do_list.entity.Role;
 import groupe2.to_do_list.entity.Personne;
 import groupe2.to_do_list.entity.Status;
 import groupe2.to_do_list.repository.TacheRepository;
 import groupe2.to_do_list.repository.PersonneRepository;
 import groupe2.to_do_list.repository.StatusRepository;
-import groupe2.to_do_list.service.PersonneService;
 import groupe2.to_do_list.service.TacheService;
 
 import org.springframework.ui.Model;
@@ -23,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -62,7 +61,6 @@ public class TacheController {
     @PostMapping(path="/add")
     public @ResponseBody String addNewTask (@RequestParam String titre,
     		@RequestParam String texte,
-			@RequestParam String dateCreation,
 			@RequestParam int personneId,
 			@RequestParam int personneCreationId,
 			@RequestParam int statusId) {
@@ -76,20 +74,20 @@ public class TacheController {
 	    	Optional<Personne> optionalPersonneCreation = personneRepository.findById(personneCreationId);
 	    	if (!optionalPersonneCreation.isPresent())
 	    		return "error #2 : no Personne field with id " + personneCreationId;
-	    	Personne personne_creation = optionalPersonneCreation.get();
+	    	Personne personneCreation = optionalPersonneCreation.get();
 	    	
 	    	Optional<Status> optionalStatus = statusRepository.findById(statusId);
 	    	if (!optionalStatus.isPresent())
 	    		return "error #3 : no Status field with id " + statusId;    	
 	    	Status status = optionalStatus.get();
 	    	
-	    	Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateCreation);
+	    //	Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dateCreation);
 	    	
 	        if (TacheService.saveTache(
 	        		titre,
 	        		texte,
 	        		personne,
-	        		personne_creation,
+	        		personneCreation,
 	        		status,
 	        		tacheRepository)) {
 	            return "Saved";
@@ -148,8 +146,9 @@ public class TacheController {
 			return "addtache";
 		}
 		try {
-			if (tache.getId_Tache() == null){
-				TacheService.saveTache(tache.getTitre(), tache.getTexte(), tache.getPersonne(), null, tache.getStatus(), tacheRepository);
+			if (tache.getIdTache() == null){
+				TacheService.saveTache(tache.getTitre(), tache.getTexte(),
+						tache.getPersonne(), tache.getPersonneCreation(), tache.getStatus(), tacheRepository);
 			} else {
 				//update
 			}
