@@ -12,6 +12,8 @@ body{
 	border: double 2px #A0A6F3;
 	padding: 25px;
 	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
 }
 
 .card {
@@ -28,6 +30,10 @@ body{
 	padding-top: 5px;
 	padding-bottom: 5px;
 	left: 10%;
+}
+
+.task:hover{
+	cursor: grab;
 }
 
 .id{
