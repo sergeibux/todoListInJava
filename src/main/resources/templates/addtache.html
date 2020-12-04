@@ -43,7 +43,7 @@
                 <select th:field="*{personne}">
                     <option value=""> -- </option>
                     <option th:each="tachepersonne : ${Personnes}"
-                            th:value="${tachepersonne.id_Personne}"
+                            th:value="${tachepersonne.idPersonne}"
                             th:utext="${tachepersonne.nom}"/>
                 </select>
         </tr>
@@ -53,12 +53,12 @@
                 <select th:field="*{status}">
                     <option value=""> -- </option>
                     <option th:each="statusTache : ${Statuses}"
-                            th:value="${statusTache.id_Status}"
+                            th:value="${statusTache.idStatus}"
                             th:utext="${statusTache.nom}"/>
                 </select>
         </tr>
         <tr>
-            <td><input type="hidden" th:field="*{id_Tache}" /> </td>
+            <td><input type="hidden" th:field="*{idTache}" /> </td>
         </tr>
 
         <tr>
