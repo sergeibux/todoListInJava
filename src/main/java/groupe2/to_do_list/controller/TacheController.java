@@ -10,18 +10,27 @@ import groupe2.to_do_list.repository.StatusRepository;
 import groupe2.to_do_list.service.PersonneService;
 import groupe2.to_do_list.service.TacheService;
 
+import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.text.SimpleDateFormat;
+
+
+
+
 
 @Controller
 @RequestMapping(path="/tache")
@@ -90,7 +99,6 @@ public class TacheController {
 	    }
     }
 
-
 	// Show Register page.
 	@RequestMapping(value = "/addtache", method = RequestMethod.GET)
 	public String addpersonne(Model model) {
@@ -154,4 +162,24 @@ public class TacheController {
 		}
 		return "redirect:/";
 	}
+    
+    @GetMapping("/list")
+    public String list(
+    		@CookieValue(value="id", defaultValue="") String id,
+    		Model model) {
+ 
+    	Status pendingStatus = statusRepository.findByNomLike("%en cours%");
+    	List<Tache> todoTasks = (List<Tache>) tacheRepository.findByStatus_IdStatus(pendingStatus.getIdStatus());
+    	
+    	Status doneStatus = statusRepository.findByNomLike("%termin%");
+    	List<Tache> doneTasks = (List<Tache>) tacheRepository.findByStatus_IdStatus(doneStatus.getIdStatus());
+    	
+    	model.addAttribute("todoTasks", todoTasks);
+    	model.addAttribute("doneTasks", doneTasks);
+    	
+    	Optional <Personne> optionalPersonne = personneRepository.findById(Integer.parseInt(id));
+    	if (optionalPersonne.isPresent())
+    		model.addAttribute("msg", optionalPersonne.get().getPrenom());
+        return "list";
+    }    
 }

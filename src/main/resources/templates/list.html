@@ -14,9 +14,9 @@
 
 	<div class="list">	
 		<h5>To do list</h5>
+			<th:block th:each="todoTask : ${todoTasks}">
 
-		<div class="card task">	
-			<p>new card</p>
+		<div class="card task" th:block th:utext="${todoTask.title}">
 		</div>
 
 	</div>

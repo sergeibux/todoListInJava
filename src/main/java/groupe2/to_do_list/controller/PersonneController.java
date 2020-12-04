@@ -86,7 +86,7 @@ public class PersonneController {
         	Cookie cookieId = new Cookie("id", String.valueOf(id));
         	response.addCookie(cookieId);
         	
-        	return "redirect:/personne/list";
+        	return "redirect:/tache/list";
         }
         // Other error!!
         catch (Exception e) {
@@ -96,21 +96,6 @@ public class PersonneController {
         }
     	
     }
-    
-    @GetMapping("/list")
-    public String list(
-    		@RequestParam(name="err", required=false, defaultValue="") String err,
-    		@CookieValue(value="id", defaultValue="") String id,
-    		Model model) {
-    	Personne p = personneRepository.findById(Integer.parseInt(id)).get();
-    	
-    	System.out.println("nom = " + p.getNom());
-    	System.out.println("prenom = " + p.getPrenom());
-    	
-        model.addAttribute("msg", p.getPrenom());
-        model.addAttribute("err", err); 
-        return "list";
-    }    
 
     @GetMapping("/toto")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
