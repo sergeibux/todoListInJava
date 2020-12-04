@@ -173,9 +173,8 @@ public class PersonneController {
             if (appUserForm.getId_Personne() == null){
                 PersonneService.savePersonne(appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), appUserForm.getRole(), personneRepository, roleRepository);
             } else {
-
                 //update
-            }
+                PersonneService.updatePersonne(appUserForm, personneRepository, appUserForm.getNom(), appUserForm.getPrenom(), appUserForm.getPassword(), appUserForm.getRole());            }
         }
         // Other error!!
         catch (Exception e) {
@@ -186,7 +185,7 @@ public class PersonneController {
         return "redirect:/";
     }
 
-    // Show Register page.
+
     @RequestMapping(value = "/listpersonne", method = RequestMethod.GET)
     public String listpersonne(Model model) {
         List<Personne> personnes = personneRepository.findAll();
