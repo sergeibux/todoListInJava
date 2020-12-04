@@ -11,13 +11,12 @@ public class Tache {
 	public Tache(
 			String titre,
 			String texte,
-			Date date_creation,
 			Personne personne,
 			Personne personne_creation,
 			Status status) {
 		this.titre = titre;
 		this.texte = texte;
-		this.date_creation = date_creation;
+		this.date_creation = new java.util.Date().getTime();
 		this.personne = personne;
 		this.personne_creation = personne_creation;
 		this.status = status;
@@ -29,8 +28,8 @@ public class Tache {
 
     private String titre;
     private String texte;
-    private Date date_creation;
-    private Date date_modification;
+    private long date_creation;
+    private long date_modification;
 
     @OneToOne
     private Personne personne;
@@ -69,19 +68,19 @@ public class Tache {
         this.texte = texte;
     }
 
-    public Date getDate_creation() {
+    public Long getDate_creation() {
         return date_creation;
     }
 
-    public void setDate_creation(Date date_creation) {
+    public void setDate_creation(long date_creation) {
         this.date_creation = date_creation;
     }
 
-    public Date getDate_modification() {
+    public Long getDate_modification() {
         return date_modification;
     }
 
-    public void setDate_modification(Date date_modification) {
+    public void setDate_modification(Long date_modification) {
         this.date_modification = date_modification;
     }
 

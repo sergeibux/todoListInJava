@@ -79,7 +79,6 @@ public class TacheController {
 	        if (TacheService.saveTache(
 	        		titre,
 	        		texte,
-	        		date,
 	        		personne,
 	        		personne_creation,
 	        		status,
@@ -142,7 +141,7 @@ public class TacheController {
 		}
 		try {
 			if (tache.getId_Tache() == null){
-
+				TacheService.saveTache(tache.getTitre(), tache.getTexte(), tache.getPersonne(), null, tache.getStatus(), tacheRepository);
 			} else {
 				//update
 			}
