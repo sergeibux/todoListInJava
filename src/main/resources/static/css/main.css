@@ -16,7 +16,15 @@ body{
 	flex-direction: column;
 }
 
+.solid-border{
+	color: white;
+	background: linear-gradient(#323031, #262A2F);
+	border-radius: 80px;
+	border: double 5px #A0A6F3;
+}
+
 .card {
+	color: black;
 	background: linear-gradient(#E6EBFF, #b5c3e4);
 	border-radius: 30px;
 	border: double 2px #7076C3;

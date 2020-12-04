@@ -7,21 +7,30 @@
 </head>
 <script>
 	function allowDrop(ev) {
-		ev.preventDefault();
+		if (ev.target.classList.contains('list')) {
+			console.log("dropzone");
+			ev.target.classList.add('solid-border');
+			ev.preventDefault();
+		}
 	}
 	
-	function denyDrop(ev) {
-		ev.preventDefault();
-	}
 	
 	function drag(ev) {
 		ev.dataTransfer.setData("text", ev.target.id);
 	}
 	
+	function doNotDrop(ev){
+		console.log("stop");
+	}
+	
 	function drop(ev) {
-		ev.preventDefault();
-		var data = ev.dataTransfer.getData("text");
-		ev.target.appendChild(document.getElementById(data));
+
+ 		if (ev.target.classList.contains('list')) {
+			ev.preventDefault();
+			var data = ev.dataTransfer.getData("text");
+			ev.target.appendChild(document.getElementById(data));
+			ev.target.classList.remove('solid-border');
+ 		}
 	}
 </script>
 <body>
@@ -31,11 +40,11 @@
 	<!--div class="alert" th:if="${err != null}"
      th:utext="${err}">...</div-->
 
-	<div class="list" id="todoList" ondrop="drop(event)" ondragover="allowDrop(event)">
+	<div class="list" id="todoList" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="event.target.classList.remove('solid-border');">
 		<h5>To do list</h5>
-		<th:block th:if="${todoTasks != null}" th:each="todoTask : ${todoTasks}">
+		<th:block th:if="${todoTasks != null}" th:each="todoTask : ${todoTasks}" ondrop="doNotDrop(event)")>
 
-			<div class="card task" th:id="${todoTask.idTache}" draggable="true" ondragstart="drag(event)">
+			<div class="card task" th:id="${todoTask.idTache}" draggable="true" ondragstart="drag(event)" ondrop="doNotDrop(event)">
 				<p style="font-style: italic; text-align:left; font-size: small;" th:utext="${todoTask.dateCreation}"></p>
 				<p style="font-weight: bolder;" th:utext="${todoTask.titre}"></p>
 				<hr>
@@ -46,11 +55,11 @@
 		</th:block>
 	</div>
 
-	<div class="list" id="doneList" ondrop="drop(event)" ondragover="allowDrop(event)">
+	<div class="list" id="doneList" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="event.target.classList.remove('solid-border');">
 		<h5>Done list</h5>
 		<th:block th:if="${doneTasks != null}" th:each="doneTask : ${doneTasks}">
 
-			<div class="card task" th:id="${doneTask.idTache}" draggable="true" ondragstart="drag(event)">
+			<div class="card task" th:id="${doneTask.idTache}" draggable="true" ondragstart="drag(event)"  ondrop="doNotDrop(event)">
 				<p style="font-style: italic; text-align:left; font-size: small;" th:utext="${doneTask.dateCreation}"></p>
 				<p style="font-weight: bolder;" th:utext="${doneTask.titre}"></p>
 				<hr>
