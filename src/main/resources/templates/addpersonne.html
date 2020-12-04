@@ -47,7 +47,7 @@
                 <select th:field="*{role}">
                     <option value=""> -- </option>
                     <option th:each="rolePersonne : ${Roles}"
-                            th:value="${rolePersonne.id_Role}"
+                            th:value="${rolePersonne.idRole}"
                             th:utext="${rolePersonne.nom}"/>
                 </select>
         </tr>
