@@ -9,16 +9,23 @@
 	<div class="msg" th:text="'Hello, ' + ${msg} + '!'"></div>
 	<!-- >div class="alert" th:text="'Hello, ' + ${alert} + '!'"></div-->
 
-	<div class="alert" th:if="${err != null}"
-     th:utext="${err}">...</div>
+	<!--div class="alert" th:if="${err != null}"
+     th:utext="${err}">...</div-->
 
 	<div class="list">	
 		<h5>To do list</h5>
-			<th:block th:each="todoTask : ${todoTasks}">
+		<!--th:block th:if="${todoTasks != null}" th:each="todoTask : ${todoTasks}">
 
-		<div class="card task" th:block th:utext="${todoTask.title}">
+			<div class="card task" th:block th:utext="${todoTask.title}"></div>
+			
+		</th:block-->
+		
+		<div class="card task">	
+			<p>second card</p>
 		</div>
-
+		<div class="card task">	
+			<p>last card</p>
+		</div>
 	</div>
 
 	<div class="list">	
@@ -26,6 +33,9 @@
 
 		<div class="card task">	
 			<p>first card</p>
+		</div>
+		<div class="card task">	
+			<p>third card</p>
 		</div>
 
 	</div>

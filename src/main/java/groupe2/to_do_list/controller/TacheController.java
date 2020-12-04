@@ -165,21 +165,28 @@ public class TacheController {
     
     @GetMapping("/list")
     public String list(
-    		@CookieValue(value="id", defaultValue="") String id,
+    		@CookieValue(value="id") String id,
     		Model model) {
  
-    	Status pendingStatus = statusRepository.findByNomLike("%en cours%");
-    	List<Tache> todoTasks = (List<Tache>) tacheRepository.findByStatus_IdStatus(pendingStatus.getIdStatus());
+//    	Status pendingStatus = statusRepository.findByNomLike("%en cours%");
+//    	List<Tache> todoTasks = (List<Tache>) tacheRepository.findByStatus_IdStatus(pendingStatus.getIdStatus());
+//    	
+//    	Status doneStatus = statusRepository.findByNomLike("%termin%");
+//    	List<Tache> doneTasks = (List<Tache>) tacheRepository.findByStatus_IdStatus(doneStatus.getIdStatus());
+//    	
+//    	model.addAttribute("todoTasks", todoTasks);
+//    	model.addAttribute("doneTasks", doneTasks);
     	
-    	Status doneStatus = statusRepository.findByNomLike("%termin%");
-    	List<Tache> doneTasks = (List<Tache>) tacheRepository.findByStatus_IdStatus(doneStatus.getIdStatus());
-    	
-    	model.addAttribute("todoTasks", todoTasks);
-    	model.addAttribute("doneTasks", doneTasks);
-    	
-    	Optional <Personne> optionalPersonne = personneRepository.findById(Integer.parseInt(id));
-    	if (optionalPersonne.isPresent())
-    		model.addAttribute("msg", optionalPersonne.get().getPrenom());
+    	if (id != null) {
+    		System.out.println ("ID : " + id);
+    		int intId = Integer.parseInt(id);
+    		System.out.println ("-> ID : " + intId);
+	    	Optional <Personne> optionalPersonne = personneRepository.findById(intId);
+	    	if (optionalPersonne.isPresent())
+	    		model.addAttribute("msg", optionalPersonne.get().getPrenom());
+    	}else {
+    		System.out.println ("ID is null : " + id);
+    	}
         return "list";
     }    
 }

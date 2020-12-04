@@ -84,6 +84,7 @@ public class PersonneController {
             }
         	
         	Cookie cookieId = new Cookie("id", String.valueOf(id));
+        	cookieId.setPath("/");
         	response.addCookie(cookieId);
         	
         	return "redirect:/tache/list";
