@@ -11,7 +11,7 @@ body{
 	border-radius: 35px;
 	border: double 2px #A0A6F3;
 	padding: 25px;
-	spacing: 150px; 
+	margin-top: 50px;
 }
 
 .card {
@@ -21,10 +21,7 @@ body{
 }
 
 .task{
-	display: flex;
 	align-items: center;
-	justify-content: space-around;
-	max-height: 30px;
 	width: 90%;
 	position: relative;
 	text-align: center;

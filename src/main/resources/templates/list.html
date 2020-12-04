@@ -14,31 +14,28 @@
 
 	<div class="list">	
 		<h5>To do list</h5>
-		<!--th:block th:if="${todoTasks != null}" th:each="todoTask : ${todoTasks}">
+		<th:block th:if="${todoTasks != null}" th:each="todoTask : ${todoTasks}">
 
-			<div class="card task" th:block th:utext="${todoTask.title}"></div>
+			<div class="card task">
+				<b><p th:utext="${todoTask.titre}"></p></b>
+				<hr>
+				<p th:utext="${todoTask.texte}"></p>
+			</div>
 			
-		</th:block-->
-		
-		<div class="card task">	
-			<p>second card</p>
-		</div>
-		<div class="card task">	
-			<p>last card</p>
-		</div>
+		</th:block>
 	</div>
 
 	<div class="list">	
 		<h5>Done list</h5>
+		<th:block th:if="${doneTasks != null}" th:each="doneTask : ${doneTasks}">
 
-		<div class="card task">	
-			<p>first card</p>
-		</div>
-		<div class="card task">	
-			<p>third card</p>
-		</div>
-
-	</div>
+			<div class="card task">
+				<b><p th:utext="${doneTask.titre}"></p></b>
+				<hr>
+				<p th:utext="${doneTask.texte}"></p>
+			</div>
+			
+		</th:block>
 </body>
 </html>
 
