@@ -151,6 +151,7 @@ public class TacheController {
 						tache.getPersonne(), tache.getPersonneCreation(), tache.getStatus(), tacheRepository);
 			} else {
 				//update
+				TacheService.updateTache(tache, tacheRepository, tache.getTitre(), tache.getTexte(), null, null, tache.getStatus());
 			}
 		}
 		// Other error!!
