@@ -165,7 +165,7 @@ public class TacheController {
     
     @GetMapping("/list")
     public String list(
-    		@CookieValue(value="id", defaultValue="") String id,
+    		@CookieValue(value="id") String id,
     		Model model) {
  
     	Status pendingStatus = statusRepository.findByNomLike("%en cours%");
@@ -177,9 +177,14 @@ public class TacheController {
     	model.addAttribute("todoTasks", todoTasks);
     	model.addAttribute("doneTasks", doneTasks);
     	
-    	Optional <Personne> optionalPersonne = personneRepository.findById(Integer.parseInt(id));
-    	if (optionalPersonne.isPresent())
-    		model.addAttribute("msg", optionalPersonne.get().getPrenom());
+    	if (id != null) {
+    		int intId = Integer.parseInt(id);
+	    	Optional <Personne> optionalPersonne = personneRepository.findById(intId);
+	    	if (optionalPersonne.isPresent())
+	    		model.addAttribute("msg", optionalPersonne.get().getPrenom());
+    	}else {
+    		System.out.println ("ID is null : " + id);
+    	}
         return "list";
     }    
 }
