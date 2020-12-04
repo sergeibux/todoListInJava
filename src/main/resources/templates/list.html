@@ -17,9 +17,11 @@
 		<th:block th:if="${todoTasks != null}" th:each="todoTask : ${todoTasks}">
 
 			<div class="card task">
-				<b><p th:utext="${todoTask.titre}"></p></b>
+				<p style="font-style: italic; text-align:left;" th:utext="${todoTask.dateCreation}"></p>
+				<p style="font-weight: bolder;" th:utext="${todoTask.titre}"></p>
 				<hr>
 				<p th:utext="${todoTask.texte}"></p>
+				<p style="font-style: italic; text-align:right;" th:utext="${todoTask.personne.prenom} + ' ' + ${todoTask.personne.nom}"></p>
 			</div>
 			
 		</th:block>
@@ -30,9 +32,11 @@
 		<th:block th:if="${doneTasks != null}" th:each="doneTask : ${doneTasks}">
 
 			<div class="card task">
-				<b><p th:utext="${doneTask.titre}"></p></b>
+				<p style="font-style: italic; text-align:left;" th:utext="${doneTask.dateCreation}"></p>
+				<p style="font-weight: bolder;" th:utext="${doneTask.titre}"></p>
 				<hr>
 				<p th:utext="${doneTask.texte}"></p>
+				<p style="font-style: italic; text-align:right;" th:utext="${doneTask.personne.prenom} + ' ' + ${doneTask.personne.nom}"></p>
 			</div>
 			
 		</th:block>
