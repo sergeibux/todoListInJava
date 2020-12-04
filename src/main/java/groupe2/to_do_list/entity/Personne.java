@@ -16,7 +16,7 @@ public class Personne {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id_Personne;
+    private Integer idPersonne;
 
     private String nom;
     private String prenom;
@@ -26,19 +26,19 @@ public class Personne {
     private Role role;
 
     public String toString() {
-    	return "Personne :> ID : " + this.id_Personne 
+    	return "Personne :> ID : " + this.idPersonne 
     + " :> Nom : " + nom 
     + " :> Prénom : " + prenom
     + " :> Mot de passe : " + password
     + " :> Role : " + role.toString();
     }
 
-    public Integer getId_Personne() {
-        return id_Personne;
+    public Integer getIdPersonne() {
+        return idPersonne;
     }
 
-    public void setId_Personne(Integer id_Personne) {
-        this.id_Personne = id_Personne;
+    public void setIdPersonne(Integer idPersonne) {
+        this.idPersonne = idPersonne;
     }
 
     public String getNom() {
