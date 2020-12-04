@@ -1,8 +1,7 @@
 body{
 	background: #161A2F;
 	display: flex;
-	align-items: center;
-	justify-content: space-around;
+	justify-content: center;
 }
 	
 .list {
@@ -14,6 +13,7 @@ body{
 	margin-top: 50px;
 	display: flex;
 	flex-direction: column;
+	margin: 150px;
 }
 
 .solid-border{
