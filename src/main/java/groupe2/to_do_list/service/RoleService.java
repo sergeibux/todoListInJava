@@ -22,7 +22,7 @@ public class RoleService{
                                          String nom) {
 
         try {
-            Optional<Role> roleToUpdate = roleRepository.findById(role.getId_Role());
+            Optional<Role> roleToUpdate = roleRepository.findById(role.getIdRole());
             if (roleToUpdate.isPresent()) {
                 Role roleUpdated = roleToUpdate.get();
                 roleUpdated.setNom(nom);
