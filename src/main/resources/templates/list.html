@@ -5,6 +5,25 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
+<script>
+	function allowDrop(ev) {
+		ev.preventDefault();
+	}
+	
+	function denyDrop(ev) {
+		ev.preventDefault();
+	}
+	
+	function drag(ev) {
+		ev.dataTransfer.setData("text", ev.target.id);
+	}
+	
+	function drop(ev) {
+		ev.preventDefault();
+		var data = ev.dataTransfer.getData("text");
+		ev.target.appendChild(document.getElementById(data));
+	}
+</script>
 <body>
 	<div class="msg" th:text="'Hello, ' + ${msg} + '!'"></div>
 	<!-- >div class="alert" th:text="'Hello, ' + ${alert} + '!'"></div-->
@@ -12,34 +31,35 @@
 	<!--div class="alert" th:if="${err != null}"
      th:utext="${err}">...</div-->
 
-	<div class="list">	
+	<div class="list" id="todoList" ondrop="drop(event)" ondragover="allowDrop(event)">
 		<h5>To do list</h5>
 		<th:block th:if="${todoTasks != null}" th:each="todoTask : ${todoTasks}">
 
-			<div class="card task">
-				<p style="font-style: italic; text-align:left;" th:utext="${todoTask.dateCreation}"></p>
+			<div class="card task" th:id="${todoTask.idTache}" draggable="true" ondragstart="drag(event)">
+				<p style="font-style: italic; text-align:left; font-size: small;" th:utext="${todoTask.dateCreation}"></p>
 				<p style="font-weight: bolder;" th:utext="${todoTask.titre}"></p>
 				<hr>
 				<p th:utext="${todoTask.texte}"></p>
-				<p style="font-style: italic; text-align:right;" th:utext="${todoTask.personne.prenom} + ' ' + ${todoTask.personne.nom}"></p>
+				<p style="font-style: italic; text-align:right; font-size: small;" th:utext="${todoTask.personne.prenom} + ' ' + ${todoTask.personne.nom}"></p>
 			</div>
 			
 		</th:block>
 	</div>
 
-	<div class="list">	
+	<div class="list" id="doneList" ondrop="drop(event)" ondragover="allowDrop(event)">
 		<h5>Done list</h5>
 		<th:block th:if="${doneTasks != null}" th:each="doneTask : ${doneTasks}">
 
-			<div class="card task">
-				<p style="font-style: italic; text-align:left;" th:utext="${doneTask.dateCreation}"></p>
+			<div class="card task" th:id="${doneTask.idTache}" draggable="true" ondragstart="drag(event)">
+				<p style="font-style: italic; text-align:left; font-size: small;" th:utext="${doneTask.dateCreation}"></p>
 				<p style="font-weight: bolder;" th:utext="${doneTask.titre}"></p>
 				<hr>
 				<p th:utext="${doneTask.texte}"></p>
-				<p style="font-style: italic; text-align:right;" th:utext="${doneTask.personne.prenom} + ' ' + ${doneTask.personne.nom}"></p>
+				<p style="font-style: italic; text-align:right; font-size: small;" th:utext="${doneTask.personne.prenom} + ' ' + ${doneTask.personne.nom}"></p>
 			</div>
 			
 		</th:block>
+	</div>
 </body>
 </html>
 
