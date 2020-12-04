@@ -41,6 +41,7 @@
 		<th:block th:if="${todoTasks != null}" th:each="todoTask : ${todoTasks}" ondrop="doNotDrop(event)")>
 
 			<div class="card task" th:id="${todoTask.idTache}" draggable="true" ondragstart="drag(event)" ondrop="doNotDrop(event)">
+				<br>
 				<p style="font-style: italic; text-align:left; font-size: small;" th:utext="${todoTask.dateCreation}"></p>
 				<p style="font-weight: bolder;" th:utext="${todoTask.titre}"></p>
 				<hr>
@@ -56,6 +57,7 @@
 		<th:block th:if="${doneTasks != null}" th:each="doneTask : ${doneTasks}">
 
 			<div class="card task" th:id="${doneTask.idTache}" draggable="true" ondragstart="drag(event)"  ondrop="doNotDrop(event)">
+				<br>
 				<p style="font-style: italic; text-align:left; font-size: small;" th:utext="${doneTask.dateCreation}"></p>
 				<p style="font-weight: bolder;" th:utext="${doneTask.titre}"></p>
 				<hr>
