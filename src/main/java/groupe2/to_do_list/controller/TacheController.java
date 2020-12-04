@@ -174,8 +174,13 @@ public class TacheController {
     	Status doneStatus = statusRepository.findByNomLike("%termin%");
     	List<Tache> doneTasks = (List<Tache>) tacheRepository.findByStatus_IdStatus(doneStatus.getIdStatus());
     	
-    	model.addAttribute("todoTasks", todoTasks);
-    	model.addAttribute("doneTasks", doneTasks);
+    	if ((todoTasks.size() == 0) && (doneTasks.size() == 0))
+    		return "redirect:/tache/addtache";
+    	
+    	if (todoTasks.size() != 0)
+    		model.addAttribute("todoTasks", todoTasks);
+    	if (doneTasks.size() != 0)
+    		model.addAttribute("doneTasks", doneTasks);
     	
     	if (id != null) {
     		int intId = Integer.parseInt(id);
