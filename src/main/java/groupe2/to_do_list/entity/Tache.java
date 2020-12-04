@@ -11,46 +11,46 @@ public class Tache {
 	public Tache(
 			String titre,
 			String texte,
-			Date date_creation,
+			Date dateCreation,
 			Personne personne,
-			Personne personne_creation,
+			Personne personneCreation,
 			Status status) {
 		this.titre = titre;
 		this.texte = texte;
-		this.date_creation = date_creation;
+		this.dateCreation = dateCreation;
 		this.personne = personne;
-		this.personne_creation = personne_creation;
+		this.personneCreation = personneCreation;
 		this.status = status;
 	}
 	
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id_Tache;
+    private Integer idTache;
 
     private String titre;
     private String texte;
-    private Date date_creation;
-    private Date date_modification;
+    private Date dateCreation;
+    private Date dateModification;
 
     @OneToOne
     private Personne personne;
 
     @OneToOne
-    private Personne personne_creation;
+    private Personne personneCreation;
 
     @OneToOne
-    private Personne personne_Modification;
+    private Personne personneModification;
 
     @OneToOne
     private Status status;
 
 
-    public Integer getId_Tache() {
-        return id_Tache;
+    public Integer getIdTache() {
+        return idTache;
     }
 
-    public void setId_Tache(Integer id_Tache) {
-        this.id_Tache = id_Tache;
+    public void setIdTache(Integer idTache) {
+        this.idTache = idTache;
     }
 
     public String getTitre() {
@@ -69,20 +69,20 @@ public class Tache {
         this.texte = texte;
     }
 
-    public Date getDate_creation() {
-        return date_creation;
+    public Date getDateCreation() {
+        return dateCreation;
     }
 
-    public void setDate_creation(Date date_creation) {
-        this.date_creation = date_creation;
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public Date getDate_modification() {
-        return date_modification;
+    public Date getDateModification() {
+        return dateModification;
     }
 
-    public void setDate_modification(Date date_modification) {
-        this.date_modification = date_modification;
+    public void setDateModification(Date dateModification) {
+        this.dateModification = dateModification;
     }
 
     public Personne getPersonne() {
@@ -93,20 +93,20 @@ public class Tache {
         this.personne = personne;
     }
 
-    public Personne getPersonne_creation() {
-        return personne_creation;
+    public Personne getPersonneCreation() {
+        return personneCreation;
     }
 
-    public void setPersonne_creation(Personne personne_creation) {
-        this.personne_creation = personne_creation;
+    public void setPersonneCreation(Personne personneCreation) {
+        this.personneCreation = personneCreation;
     }
 
-    public Personne getPersonne_Modification() {
-        return personne_Modification;
+    public Personne getPersonneModification() {
+        return personneModification;
     }
 
-    public void setPersonne_Modification(Personne personne_Modification) {
-        this.personne_Modification = personne_Modification;
+    public void setPersonneModification(Personne personneModification) {
+        this.personneModification = personneModification;
     }
 
     public Status getStatus() {

@@ -1,7 +1,5 @@
 package groupe2.to_do_list.service;
 
-import groupe2.to_do_list.entity.Role;
-import groupe2.to_do_list.repository.PersonneRepository;
 import groupe2.to_do_list.repository.TacheRepository;
 import groupe2.to_do_list.entity.Tache;
 import groupe2.to_do_list.entity.Personne;
@@ -16,11 +14,11 @@ public class TacheService {
             String texte,
             Date date_creation,
             Personne personne,
-            Personne personne_creation,
+            Personne personneCreation,
             Status status,
             TacheRepository tacheRepository) {
         try {
-            Tache tache = new Tache(titre, texte, date_creation, personne, personne_creation, status);
+            Tache tache = new Tache(titre, texte, date_creation, personne, personneCreation, status);
 
             tacheRepository.save(tache);
             return true;
@@ -30,16 +28,16 @@ public class TacheService {
     }
 
     public static boolean updateTache(Tache tache, TacheRepository tacheRepository, String titre, String texte,
-                                      Date dateModification, Personne personneCreation, Status status, Role role) {
+                                      Date dateModification, Personne personneCreation, Status status) {
 
         try {
-            Optional<Tache> tacheToUpdate = tacheRepository.findById(tache.getId_Tache());
+            Optional<Tache> tacheToUpdate = tacheRepository.findById(tache.getIdTache());
             if (tacheToUpdate.isPresent()) {
                 Tache tacheUpdated = tacheToUpdate.get();
                 tacheUpdated.setTitre(titre);
                 tacheUpdated.setTexte(texte);
-                tacheUpdated.setDate_modification(dateModification);
-                tacheUpdated.setPersonne_creation(personneCreation);
+                tacheUpdated.setDateModification(dateModification);
+                tacheUpdated.setPersonneCreation(personneCreation);
                 tacheUpdated.setStatus(status);
             }
 
@@ -50,9 +48,9 @@ public class TacheService {
 
     }
 
-    public static boolean deleteUser(int id_tache, TacheRepository tacheRepository) {
+    public static boolean deleteUser(int idTache, TacheRepository tacheRepository) {
         try {
-            Tache t = tacheRepository.findById(id_tache).get();
+            Tache t = tacheRepository.findById(idTache).get();
             if (t != null)
                 tacheRepository.delete(t);
 
