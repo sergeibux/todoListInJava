@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:utext="${title}"></title>
+    <style>
+        th, td {
+            padding: 5px;
+        }
+        td span  {
+            font-size:90%;
+            font-style: italic;
+            color: red;
+        }
+        .error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Include _menu.html
+<th:block th:include="/_menu"></th:block>-->
+
+<h2>Register</h2>
+
+<div th:if="${errorMessage != null}"
+     th:utext="${errorMessage}" class="error">...</div>
+
+<form th:action="@{/tache/register}" th:object="${tache}" method="POST">
+    <table>
+        <tr>
+            <td>Titre</td>
+            <td><input type="text" th:field="*{titre}" /> </td>
+        </tr>
+        <tr>
+            <td>Texte</td>
+            <td><input type="text" th:field="*{texte}" /> </td>
+        </tr>
+        <tr>
+            <td>Personne</td>
+            <td>
+                <select th:field="*{personne}">
+                    <option value=""> -- </option>
+                    <option th:each="tachepersonne : ${Personnes}"
+                            th:value="${tachepersonne.id_Personne}"
+                            th:utext="${tachepersonne.nom}"/>
+                </select>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>
+                <select th:field="*{status}">
+                    <option value=""> -- </option>
+                    <option th:each="statusTache : ${Statuses}"
+                            th:value="${statusTache.id_Status}"
+                            th:utext="${statusTache.nom}"/>
+                </select>
+        </tr>
+        <tr>
+            <td><input type="hidden" th:field="*{id_Tache}" /> </td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <input type="submit" value="Submit" />
+                <a th:href="@{/}">Cancel</a>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
